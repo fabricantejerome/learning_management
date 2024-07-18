@@ -1,26 +1,38 @@
-<h2>Log in</h2>
+<div class="w-full flex flex-col justify-start items-center">
+    <div class="flex md:w-1/2 justify-center py-10 items-center bg-white">
+        <%= form_for(resource, as: resource_name, url: session_path(resource_name), class: "bg-white") do |f| %>
+            <%= render "devise/shared/error_messages", resource: resource %>
 
-<%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
-  <div class="field">
-    <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
-  </div>
+            <h1 class="text-gray-800 font-bold text-2xl mb-3">Log In</h1>
 
-  <div class="field">
-    <%= f.label :password %><br />
-    <%= f.password_field :password, autocomplete: "current-password" %>
-  </div>
+            <div class="flex items-center border-2 py-2 px-3 rounded-2xl mb-4">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M16.5 12a4.5 4.5 0 1 1-9 0 4.5 4.5 0 0 1 9 0Zm0 0c0 1.657 1.007 3 2.25 3S21 13.657 21 12a9 9 0 1 0-2.636 6.364M16.5 12V8.25" />
+                </svg>
 
-  <% if devise_mapping.rememberable? %>
-    <div class="field">
-      <%= f.check_box :remember_me %>
-      <%= f.label :remember_me %>
+                <%= f.email_field :email, class: "pl-2 outline-non border-none border-transparent focus:border-transparent focus:ring-0", placeholder: "Email Address", autocomplete: "email", autofocus: true %>
+            </div>
+
+            <div class="flex items-center border-2 py-2 px-3 rounded-2xl mb-4">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M16.5 10.5V6.75a4.5 4.5 0 1 0-9 0v3.75m-.75 11.25h10.5a2.25 2.25 0 0 0 2.25-2.25v-6.75a2.25 2.25 0 0 0-2.25-2.25H6.75a2.25 2.25 0 0 0-2.25 2.25v6.75a2.25 2.25 0 0 0 2.25 2.25Z" />
+                </svg>
+
+                <%= f.password_field :password, class: "pl-2 outline-non border-none border-transparent focus:border-transparent focus:ring-0", placeholder: "Password", autocomplete: "new-password" %>
+            </div>
+
+            <% if devise_mapping.rememberable?%>
+                <div class="mt-4 ml-2">
+                    <%= f.check_box :remember_me, class: "rounded" %>
+                    <%= f.label :remember_me, class: "text-gray-400 text-sm font-bold" %>
+                </div>
+            <% end %>
+
+            <%= f.submit "Log In", class: "btn-primary" %>
+            
+            <div class="mt-6">
+                <%= render "devise/shared/links" %>
+            </div>
+        <% end %>
     </div>
-  <% end %>
-
-  <div class="actions">
-    <%= f.submit "Log in" %>
-  </div>
-<% end %>
-
-<%= render "devise/shared/links" %>
+</div>

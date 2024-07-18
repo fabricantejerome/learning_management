@@ -1,16 +1,23 @@
-<h2>Resend confirmation instructions</h2>
+<div class="w-full flex flex-col justify-start items-center">
+    <div class="flex md:w-1/2 justify-center py-10 items-center bg-white">
+        <%= form_for(resource, as: resource_name, url: confirmation_path(resource_name), html: { method: :post }, class: "bg-white") do |f| %>
+            <%= render "devise/shared/error_messages", resource: resource %>
 
-<%= form_for(resource, as: resource_name, url: confirmation_path(resource_name), html: { method: :post }) do |f| %>
-  <%= render "devise/shared/error_messages", resource: resource %>
+            <h1 class="text-gray-800 font-bold text-2xl mb-3">Resend confirmation instructions</h1>
 
-  <div class="field">
-    <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true, autocomplete: "email", value: (resource.pending_reconfirmation? ? resource.unconfirmed_email : resource.email) %>
-  </div>
+            <div class="flex items-center border-2 py-2 px-3 rounded-2xl mb-4">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M16.5 12a4.5 4.5 0 1 1-9 0 4.5 4.5 0 0 1 9 0Zm0 0c0 1.657 1.007 3 2.25 3S21 13.657 21 12a9 9 0 1 0-2.636 6.364M16.5 12V8.25" />
+                </svg>
 
-  <div class="actions">
-    <%= f.submit "Resend confirmation instructions" %>
-  </div>
-<% end %>
+                <%= f.email_field :email, class: "pl-2 outline-non border-none border-transparent focus:border-transparent focus:ring-0", placeholder: "Email Address", autocomplete: "email", autofocus: true, value: (resource.pending_reconfirmation? ? resource.unconfirmed_email : resource.email) %>
+            </div>
 
-<%= render "devise/shared/links" %>
+            <%= f.submit "Resend confirmation", class: "btn-primary" %>
+            
+            <div class="mt-6">
+                <%= render "devise/shared/links" %>
+            </div>
+        <% end %>
+    </div>
+</div>
