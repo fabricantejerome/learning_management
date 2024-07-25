@@ -7,7 +7,7 @@
 
   <div id="courses" class="min-w-full flex flex-wrap justify-center gap-14 pb-6">
     <% @courses.each do |course| %>
-      <%= render course, { user_started_courses: @user_started_courses, user_course_progresses: @user_course_progresses } %>
+      <%= render course, { user_started_courses: @user_started_courses, user_course_progresses: @user_course_progresses, user_unlocked_courses: @user_unlocked_courses } %>
     <% end %>
   </div>
 </div>
