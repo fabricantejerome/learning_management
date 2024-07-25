@@ -1,6 +1,7 @@
 class LessonsController < ApplicationController
     before_action :set_lesson, only: %i[ show update ]
     before_action :set_course
+    before_action :check_paid
 
     # GET /lessons/new
     def show
@@ -30,5 +31,15 @@ class LessonsController < ApplicationController
 
         def set_lesson
             @lesson = Lesson.find(params[:id])
+        end
+
+        def check_paid
+            if @lesson.paid && !current_user.course_users.where(course_id: params[:course_id]).exists?
+                if (@lesson.previous_lesson)
+                    redirect_to course_lesson_path(@course, @lesson.previous_lesson), notice: "You must purchase the full course to access the next lesson"
+                else
+                    redirect_to course_path(@course), notice: "You must purchase the full course to access the next lesson"
+                end
+            end
         end
 end
