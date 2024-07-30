@@ -7,6 +7,7 @@ class Lesson < ApplicationRecord
 
     belongs_to :course
     has_many :lesson_users, dependent: :destroy
+    has_rich_text :description
 
     def next_lesson
         course.lessons.where("position > ?", position).order(:position).first
