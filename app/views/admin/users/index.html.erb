@@ -1,0 +1,39 @@
+<div class="flx flex-col justify-start items-center w-full">
+    <p style="color: green"><%= notice %></p>
+
+    <div class="w-full overflow-x-auto">
+        <table class="min-w-full bg-amaranth-50" style="border-collapse: separate; border-spacing: 0;">
+            <thead>
+                <tr class="text-amaranth-800">
+                    <th class="px-6 py-3 border-b-2 border-amaranth-200 text-start bg-amarant-100">
+                    </th>
+                     <th class="px-6 py-3 border-b-2 border-amaranth-200 text-start bg-amarant-100">
+                        Email
+                    </th>
+                    <th class="px-6 py-3 border-b-2 border-amaranth-200 text-start bg-amarant-100">
+                        Created At
+                    </th>
+                    <th class="px-6 py-3 border-b-2 border-amaranth-200 text-start bg-amarant-100">
+                        Updated At
+                    </th>
+                    <th class="px-6 py-3 border-b-2 border-amaranth-200 text-start bg-amarant-100">
+                        Destroy User
+                    </th>
+                </tr>
+            </thead>
+            <tbody class="text-gray-800">
+                <% @admin_users.each do |user| %>
+                    <tr>
+                        <td class="px-6 py-4 border-b border-gray-200"><%= link_to user.id, admin_user_path(user), class: "underline" %></td>
+                        <td class="px-6 py-4 border-b border-gray-200"><%= user.email %></td>
+                        <td class="px-6 py-4 border-b border-gray-200"><%= user.created_at.to_formatted_s(:long) %></td>
+                        <td class="px-6 py-4 border-b border-gray-200"><%= user.updated_at.to_formatted_s(:long) %></td>
+                        <td class="px-6 py-4 border-b border-gray-200">
+                            <%= button_to icon('fa-solid', 'trash-can'), [:admin, @user], method: :delete, data: {'turbo-confirm': "Are you sure? All their data will be deleted"}, class: "text-red-600" %>
+                        </td>
+                    </tr>
+                <% end %>
+            </tbody>
+        </table>
+    </div>
+</div>
