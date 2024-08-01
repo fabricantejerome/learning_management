@@ -12,7 +12,3 @@
 if !Admin.exists?(email: "admin@local.com")
   Admin.create!(email: "admin@local.com", password: "password")
 end
-
-if !User.exists?(email: "test@local.com")
-  User.create!(email: "test@local.com", password: "password")
-end
