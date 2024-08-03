@@ -19,6 +19,8 @@ class CoursesController < ApplicationController
   # GET /courses/1 or /courses/1.json
   def show
     @completed_lessons = current_user&.lesson_users&.joins(:lesson)&.where(completed: true, lesson: { course: @course })&.pluck(:lesson_id)
+    @user_unlocked_course = current_user&.course_users&.where(course: @course)&.exists?
+    puts "user unlock course #{@user_unlocked_course}"
   end
 
   # GET /courses/new
